@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class UC3PalindromeCheckerApp {
+public class UC6PalindromeCheckerApp {
     public static void main(String[] args){
         System.out.println("Welcome to the Palindrome Checker Management System");
         System.out.println("Version: 1.0");
@@ -11,15 +11,25 @@ public class UC3PalindromeCheckerApp {
         System.out.println("\nEnter String to check: ");
         String str = input.next();
 
-        String reversed = "";
+        Stack<Character> stack = new Stack<>();
 
-        // Iterate from last character to first
-        for (int i = str.length() - 1; i >= 0; i--) {
-            reversed = reversed + str.charAt(i);
+        Queue<Character> queue = new LinkedList<>();
+
+        for (char c : str.toCharArray()) {
+            stack.push(c);
+            queue.add(c);
         }
 
-        // Compare original and reversed strings
-        if (str.equals(reversed)) {
+        boolean isPalindrome = true;
+
+        while (!queue.isEmpty()) {
+            if (!queue.remove().equals(stack.pop())) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        if (isPalindrome) {
             System.out.println("Palindrome");
         } else {
             System.out.println("Not Palindrome");
